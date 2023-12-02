@@ -2,13 +2,13 @@ function lockrebase
 
   # locals
   set -l print_only 0
-  set -l main_branch "origin/main"
+  set -l main_branch "main"
   
   for arg in $argv
     switch $arg
       case '--print-only'
         set print_only 1
-      case '--main=*'
+      case '--main'
         set main_branch (string replace -- '--main=' '' -- $arg)
       case '--help'
         echo "lockrebase: A tool to manage package lock files during git rebase."
