@@ -18,34 +18,60 @@ fisher install squarism/lockrebase
 
 ## Usage
 
+```
+lockrebase: A tool to manage package lock files during git rebase.
+Usage: lockrebase <package manager> [flags]
+
+Supported package managers:
+  bundler  - Ruby's package manager.
+  npm      - NodeJS's package manager.
+  poetry   - Python's package manager.
+  yarn     - NodeJS's package manager.
+
+Flags:
+  --help   - This output.
+
+Example:
+  To resolve `yarn.lock` from main for a Yarn project:
+
+    lockrebase yarn
+```
+
+
+## Details
+
+This example show how this works with NPM but other package managers are known.
+
 You use this command when all other commands are finished and you want to resolve your lock file.  For example, you have already rebased package.json but `package-lock.json` is still conflicted:
 
 ```
 Changes to be committed:
   (use "git restore --staged <file>..." to unstage)
-	modified:   package.json
+  modified:   package.json
 
 Unmerged paths:
   (use "git restore --staged <file>..." to unstage)
   (use "git add <file>..." to mark resolution)
-	both modified:   package-lock.json
+  both modified:   package-lock.json
 ```
-Now you resolve `package-lock.json` using `lockrebase`.  `lockrebase` only deals with the lockfile.
+Now you resolve `package-lock.json` using `lockrebase npm`.  `lockrebase` only deals with the lockfile as the
+last step, the other files you have to resolve yourself.
 
-
+If you want to do it yourself then you can do this:
 ```
-lockrebase yarn
-```
-After confirmation, this effectively will do `git checkout origin/main -- yarn.lock; yarn install; git add yarn.lock; git rebase --continue`.  Lockrebase support a few flags
-
-This shell helper includes autocomplete for the package manager it knows about and extra option flags.  See `--help` for a full list.  Here are a sampling of flags `lockrebase` has.
-
-```
---print-only      Prints the command to be run but does not execute it
---main=[branch]   Overrides the remote branch.  Default: origin/main
+lockrebase --print-only npm
+git checkout main -- package-lock.json; npm install; git add package-lock.json; git rebase --continue
 ```
 
-These flags are also covered by autocomplete, so after installing `lockrebase` and the autocomplete helper, hit `[tab][tab]` after typing `lockrebase`.
+
+`lockrebase` includes autocomplete for the flags and the package manager.  Hit `[tab][tab]` after typing
+`lockrebase` to explore.
+
+```
+--print-only  (Prints the command to be run but does not execute it)
+--main        (Overrides the remote branch. Default: origin/main)
+--help        (Show help information)
+```
 
 
 The following package managers are known:
