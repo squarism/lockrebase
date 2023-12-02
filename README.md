@@ -18,6 +18,21 @@ fisher install squarism/lockrebase
 
 ## Usage
 
+You use this command when all other commands are finished and you want to resolve your lock file.  For example, you have already rebased package.json but `package-lock.json` is still conflicted:
+
+```
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	modified:   package.json
+
+Unmerged paths:
+  (use "git restore --staged <file>..." to unstage)
+  (use "git add <file>..." to mark resolution)
+	both modified:   package-lock.json
+```
+Now you resolve `package-lock.json` using `lockrebase`.  `lockrebase` only deals with the lockfile.
+
+
 ```
 lockrebase yarn
 ```
@@ -27,7 +42,6 @@ This shell helper includes autocomplete for the package manager it knows about a
 
 ```
 --print-only      Prints the command to be run but does not execute it
---force           Does not prommpt to confirm execution
 --main=[branch]   Overrides the remote branch.  Default: origin/main
 ```
 
