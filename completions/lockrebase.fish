@@ -1,5 +1,8 @@
 # autocompletions for the package manager main argument
 complete -f -c lockrebase -n "__fish_use_subcommand" -a bundler -d "Resolve Gemfile.lock"
+complete -f -c lockrebase -n "__fish_use_subcommand" -a cargo -d "Resolve Cargo.lock"
+complete -f -c lockrebase -n "__fish_use_subcommand" -a composer -d "Resolve composer.lock"
+complete -f -c lockrebase -n "__fish_use_subcommand" -a mix -d "Resolve mix.lock"
 complete -f -c lockrebase -n "__fish_use_subcommand" -a npm -d "Resolve package-lock.json"
 complete -f -c lockrebase -n "__fish_use_subcommand" -a poetry -d "Resolve poetry.lock"
 complete -f -c lockrebase -n "__fish_use_subcommand" -a yarn -d "Resolve yarn.lock"

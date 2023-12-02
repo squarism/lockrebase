@@ -17,9 +17,9 @@ function lockrebase
         echo "Supported package managers:"
         
         echo "  bundler  - Ruby's package manager."
-        # echo "  cargo    - Rust's package manager."
-        # echo "  composer - PHP's package manager."
-        # echo "  mix      - Elixir's package manager."
+        echo "  cargo    - Rust's package manager."
+        echo "  composer - PHP's package manager."
+        echo "  mix      - Elixir's package manager."
         echo "  npm      - NodeJS's package manager."
         echo "  poetry   - Python's package manager."
         echo "  yarn     - NodeJS's package manager."
@@ -53,11 +53,14 @@ function lockrebase
     case bundler
       set command "git checkout $main_branch -- Gemfile.lock; bundle install; git add Gemfile.lock; git rebase --continue"
   
-    # cargo
+    case cargo
+      set command "git checkout $main_branch -- Cargo.lock; cargo install; git add Cargo.lock; git rebase --continue"
     
-    # composer
+    case composer
+      set command "git checkout $main_branch -- composer.lock; php composer.phar install; git add composer.lock; git rebase --continue"
     
-    # mix
+    case mix
+      set command "git checkout $main_branch -- mix.lock; mix deps.get; git add mix.lock; git rebase --continue"
   
     case npm
       set command "git checkout $main_branch -- package-lock.json; npm install; git add package-lock.json; git rebase --continue"
